@@ -11,10 +11,33 @@ export default function SplashScreen({ onEnter }) {
     return () => clearTimeout(t);
   }, []);
 
+  const handleMouseMove = (e) => {
+    if (clicked || !circleRef.current) return;
+    const el = circleRef.current;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -15;
+    const rotateY = ((x - centerX) / centerX) * 15;
+
+    el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.035)`;
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+    if (clicked || !circleRef.current) return;
+    const el = circleRef.current;
+    el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+  };
+
   const handleClick = () => {
     if (clicked) return;
     setClicked(true);
-    // Pass the circle's bounding rect so Home.jsx can fly it to the hero card
+    // Pass the card's bounding rect so Home.jsx can fly it to the hero card
     const rect = circleRef.current?.getBoundingClientRect() ?? null;
     setTimeout(() => onEnter(rect), 80);
   };
@@ -74,11 +97,12 @@ export default function SplashScreen({ onEnter }) {
           transition: clicked ? 'opacity 0.1s ease-out' : 'opacity 1s ease-out, background 0.45s ease',
         }} />
 
-        {/* ── Circular logo badge ── */}
+        {/* ── 3D Circular Logo Card ── */}
         <div
           ref={circleRef}
           onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
           style={{
             width: '260px',
             height: '260px',
@@ -86,21 +110,18 @@ export default function SplashScreen({ onEnter }) {
             overflow: 'hidden',
             border: hovered ? '2.5px solid rgba(205,164,94,0.85)' : '2.5px solid rgba(205,164,94,0.6)',
             boxShadow: hovered ? `
-              0 0 0 8px rgba(205,164,94,0.09),
-              0 0 55px 18px rgba(205,164,94,0.52),
-              0 25px 70px rgba(0,0,0,0.92)
+              0 0 35px rgba(205,164,94,0.4),
+              0 15px 40px rgba(0,0,0,0.85)
             ` : `
-              0 0 0 6px rgba(205,164,94,0.07),
-              0 0 50px 15px rgba(205,164,94,0.45),
-              0 20px 60px rgba(0,0,0,0.9)
+              0 10px 30px rgba(0,0,0,0.75)
             `,
             opacity: visible ? (clicked ? 0 : 1) : 0,
             transform: visible
-              ? (hovered ? 'scale(1.025)' : 'scale(1)')
+              ? (clicked ? 'scale(0.9) rotateY(0deg) rotateX(0deg)' : 'scale(1)')
               : 'scale(0.5)',
             transition: clicked ? 'opacity 0.08s ease-out' : `
               opacity 0.9s ease-out 0.2s,
-              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.15s ease-out,
               border 0.45s ease,
               box-shadow 0.45s ease
             `,
@@ -108,6 +129,8 @@ export default function SplashScreen({ onEnter }) {
             flexShrink: 0,
             position: 'relative',
             zIndex: 2,
+            transformStyle: 'preserve-3d',
+            perspective: '1000px',
           }}
         >
           {/* Logo badge — contain so that the full gold circle fits inside */}
@@ -115,7 +138,7 @@ export default function SplashScreen({ onEnter }) {
             width: '100%',
             height: '100%',
             backgroundImage: `url('/logocafe.png')`,
-            backgroundSize: 'contain',
+            backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
           }} />
@@ -124,15 +147,15 @@ export default function SplashScreen({ onEnter }) {
           <div style={{
             position: 'absolute', inset: 0,
             borderRadius: '50%',
-            background: 'radial-gradient(circle at center, transparent 52%, rgba(5,2,1,0.5) 100%)',
+            background: 'radial-gradient(circle at center, transparent 60%, rgba(5,2,1,0.6) 100%)',
             pointerEvents: 'none',
           }} />
 
           {/* Shimmer sweep */}
           <div style={{
             position: 'absolute', inset: 0,
-            background: 'linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%)',
-            animation: 'shimmer 3s ease-in-out infinite',
+            background: 'linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.06) 50%, transparent 70%)',
+            animation: 'shimmer 3.5s ease-in-out infinite',
             pointerEvents: 'none',
           }} />
         </div>

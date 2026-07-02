@@ -20,40 +20,47 @@ The website's visual language is tailored to reflect this premium status:
 
 ## 🎨 Implemented Features & Interactions
 
-### 1. Global Looping Background Video
-- Integrates a custom Firefly-generated luxury coffee cinematic video (`coffe-video.mp4`) as a global background layer.
-- Loops smoothly behind all transparent sections at a subtle `35%` opacity, protected by a center-lit radial dark mask overlay to keep typography razor-sharp and highly legible.
+### 1. Interactive 3D Splash Screen & Flyer Transition
+- **3D Circular Brand Card**: Displays a centrally floating circular logo card on page load, with gold borders and a perfectly fitted brand mark.
+- **3D Mouse Tilt Physics**: Moving your cursor over the logo card triggers real-time X/Y rotation tilt, making it behave as a tangible 3D card.
+- **Ghost Flyer flight**: Clicking the splash card morphs it into a rectangle card, spinning it Y-axis $360^\circ$ and flying it to the target Hero section slot with a power-weighted landing.
+- **Progressive Staggered Reveal**: Layout elements load in clean 1-second intervals after the card lands:
+  - **0.0s**: 3D card lands in the Hero slot.
+  - **1.0s**: Left-side Title and Subtitle fade in.
+  - **2.0s**: Left-side description, CTA buttons, and altitude counters fade in.
+  - **3.0s**: Top header **Navbar** fades in cleanly.
+  - **4.0s**: Floating background canvas coffee seeds/beans and all remaining page sections load in.
 
-### 2. Scroll-Linked Background Cross-Fading
-- Utilizes the **`IntersectionObserver` API** to dynamically track scroll position.
-- Cross-fades (0s-1000ms easing opacity shifts) between three custom landscape backdrops matching your coffee scenes:
-  - **Featured Collection**: Coffee beans pouring from a rustic burlap sack.
-  - **Our Story / About**: A golden espresso group head pulling rich crema.
-  - **Menu & Contact**: A matte black cup of latte art surrounded by scattered beans.
+### 2. Canvas Falling Coffee Beans (Interactive Particle System)
+- Integrates a lightweight **HTML5 Canvas particle background** rendering a mixture of gold and espresso-colored coffee beans.
+- **Scroll-Velocity Responsive**: The beans fall faster dynamically in response to scroll velocity.
+- **Mouse-Repel Physics**: The coffee seeds calculate distances from the mouse cursor in real-time, gently dodging away when the mouse approaches.
 
-### 3. Responsive Component Layouts (14 Sections)
-1. **Navbar**: Sticky glassmorphic bar, custom Monogram DC SVG logo, and responsive mobile nav drawer.
-2. **Hero**: Dual CTA buttons, floating coffee beans, rising steam animations, and a GSAP mouse-parallax cup.
-3. **Featured Collection**: Rare beans micro-lots (Panama Geisha, Ethiopian Yirgacheffe, Sumatra Mandheling) with tasting badges, altitude notes, and custom SCCA ratings.
-4. **Best Sellers**: Velvety gold-bordered cards displaying ratings, review counts, and quick-add actions.
-5. **Our Story (About)**: Overlapping image grids detailing the brand's sourcing philosophy.
-6. **Why Choose Us**: Value grids showcasing ethical sourcing, micro-roasting, and Certified Q-Graders.
-7. **Boutique Menu**: Category filter tabs (Espressos, Lattes, Cold Brews, Desserts) powered by Framer Motion transitions.
-8. **Brewing Process**: Vertical timeline chronological steps fading on scroll.
-9. **Testimonials**: Touch-friendly Swiper.js carousel displaying client reviews inside glassmorphic cards.
-10. **Gallery**: Lightbox-enabled photo grid showing roasting, extraction, and origin farm details.
-11. **FAQ**: Expanding height accordions built using Framer Motion's `AnimatePresence`.
-12. **Newsletter**: High-contrast newsletter signup box.
-13. **Contact Details & Live Map**: Details list, a live Google Maps embed, and an interactive feedback form.
-14. **Footer**: Concierge concierge input boxes and shortcut navigation.
+### 3. Overlapping 3D Flippable Cards (Sourcing the Extravagant)
+- Features two overlapping image cards in the **About** section.
+- **Scroll 3D Flip Entrance**: The cards perform a staggered 3D Y-axis flip rotation from $180^\circ$ to $0^\circ$ when scrolled into view.
+- **Click-to-Flip Narrative**: Clicking either card flips it $180^\circ$ around the Y-axis to reveal detailed roastery profiling and concierge extraction logs on the back of the card.
 
-### 4. Interactive Card Lifts & Glows
-- Hovering over any product card, testimonial card, or contact detail card triggers a smooth translation lift (`hover:-translate-y-1`) and throws an ambient gold shadow aura (`hover:shadow-[0_0_30px_rgba(205,164,94,0.08)]`).
-- Form inputs glow softly with golden focus borders.
+### 4. Interactive Card Shufflings & Flips
+- **Why Choose Us Card Shuffling**: Cards perform a staggered, scattered "card shuffle" layout entrance, sliding and rotating into their columns from left, right, top, and bottom.
+- **Menu & Gallery 3D Flips**: Scrolling into the **Boutique Menu** and **Gallery** triggers a dynamic, staggered Y-axis 3D flip-in entrance.
 
-### 5. Serverless Live Email Delivery
+### 5. Global Background Video & Cross-Fades
+- Integrates a custom luxury coffee background video loop, dimmed with a dark vignette mask for readability.
+- Cross-fades between three custom backdrops on scroll via the **`IntersectionObserver` API**:
+  - **Featured Collection / Best Sellers**: Pouring beans.
+  - **Our Story / About / Brewing**: Golden extraction.
+  - **Menu / Gallery / FAQ / Contact**: Latte art.
+
+### 6. Custom FAQ Accordions
+- Responsive accordion cards covering tailored topics:
+  - **"Sell or Not"** wholesale and retail distribution.
+  - **"Membership"** Dheek Cellar Club member benefits.
+  - **"Let us Know"** feedback and direct roasting team communication.
+
+### 7. Serverless Live Email Delivery
 - The **Get in Touch** form is connected directly to the serverless FormSubmit API.
-- All submissions (Visitor Name, Email, and Message) are dispatched directly to **`dheekshithnaidu@gmail.com`** via background AJAX POST requests, displaying an inline validation success screen.
+- All submissions (Visitor Name, Email, and Message) are dispatched directly to **`dheekshithnaidu@gmail.com`** via background AJAX POST requests.
 
 ---
 

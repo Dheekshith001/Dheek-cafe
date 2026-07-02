@@ -48,7 +48,7 @@ export default function Home() {
     const startWidth = circleBounds ? circleBounds.width : 260;
     const startHeight = circleBounds ? circleBounds.height : 260;
 
-    // Set initial flyer state (circle badge)
+    // Set initial flyer state (circular card matching splash)
     gsap.set(el, {
       display: 'block',
       position: 'fixed',
@@ -58,7 +58,7 @@ export default function Home() {
       height: startHeight,
       borderRadius: '50%',
       border: '2.5px solid rgba(205,164,94,0.6)',
-      boxShadow: '0 0 50px 15px rgba(205,164,94,0.45)',
+      boxShadow: '0 10px 30px rgba(0,0,0,0.75)',
       rotateY: 0,
       rotateX: 0,
       rotateZ: 0,
