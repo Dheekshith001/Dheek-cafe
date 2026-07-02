@@ -9,14 +9,23 @@ function FeatureCard({ feature, idx }) {
   // Dynamically resolve Lucide Icon
   const IconComponent = Icons[feature.icon] || Icons.Coffee;
 
+  // Directions and rotations for a scattered shuffle deck card entrance
+  const shuffleDirections = [
+    { x: -90, y: 30, rotate: -10 },
+    { x: -30, y: -60, rotate: 6 },
+    { x: 30, y: 60, rotate: -6 },
+    { x: 90, y: -30, rotate: 10 }
+  ];
+  const dir = shuffleDirections[idx % 4];
+
   return (
     <motion.div
       ref={cardRef}
       className="bg-chocolate border border-white/10 rounded-2xl p-8 flex flex-col items-center text-center hover:border-gold/50 hover:shadow-[0_0_35px_rgba(205,164,94,0.2),_0_20px_40px_rgba(0,0,0,0.55)] group transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, x: dir.x, y: dir.y, rotate: dir.rotate }}
+      whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
       viewport={{ once: false, margin: '-50px' }}
-      transition={{ duration: 0.6, delay: idx * 0.1 }}
+      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: idx * 0.12 }}
     >
       {/* Icon Container */}
       <div className="w-14 h-14 bg-espresso/40 border border-gold/20 rounded-xl flex items-center justify-center text-gold mb-6 group-hover:bg-gold group-hover:text-chocolate group-hover:border-gold group-hover:shadow-[0_0_15px_rgba(205,164,94,0.45)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">

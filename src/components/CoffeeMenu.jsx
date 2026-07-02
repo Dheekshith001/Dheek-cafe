@@ -4,7 +4,7 @@ import { menuCategories, menuItems } from '../data/coffeeData';
 import use3DTilt from '../hooks/use3DTilt';
 import { useScrollCardContext } from '../context/ScrollCardContext';
 
-function MenuItemCard({ item }) {
+function MenuItemCard({ item, idx }) {
   // Use slightly lower max tilt degrees (8) for a wider horizontal card layout
   const cardRef = use3DTilt(8, 1.012);
 
@@ -12,10 +12,12 @@ function MenuItemCard({ item }) {
     <motion.div
       ref={cardRef}
       layout
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.4 }}
+      initial={{ opacity: 0, rotateY: 90, scale: 0.95 }}
+      whileInView={{ opacity: 1, rotateY: 0, scale: 1 }}
+      exit={{ opacity: 0, rotateY: -90, scale: 0.95 }}
+      viewport={{ once: false, margin: '-40px' }}
+      transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: (idx % 2) * 0.1 }}
+      style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
       className="flex items-center gap-4 md:gap-6 bg-espresso-dark/20 border border-white/10 rounded-2xl p-4 md:p-6 hover:border-gold/50 hover:bg-espresso-dark/45 hover:shadow-[0_12px_35px_rgba(205,164,94,0.15),_0_10px_25px_rgba(0,0,0,0.45)] group transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
     >
       {/* Thumbnail */}
@@ -96,8 +98,8 @@ export default function CoffeeMenu() {
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           <AnimatePresence mode="popLayout">
-            {filteredItems.map((item) => (
-              <MenuItemCard key={item.id} item={item} />
+            {filteredItems.map((item, idx) => (
+              <MenuItemCard key={item.id} item={item} idx={idx} />
             ))}
           </AnimatePresence>
         </motion.div>

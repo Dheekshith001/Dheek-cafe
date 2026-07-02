@@ -36,10 +36,11 @@ export default function Gallery() {
             <motion.div
               key={item.id}
               className="relative rounded-2xl overflow-hidden aspect-[4/3] border border-white/5 group cursor-pointer shadow-md transition-all duration-500 hover:border-gold/50 hover:shadow-[0_0_35px_rgba(205,164,94,0.2),_0_15px_30px_rgba(0,0,0,0.5)] hover:-translate-y-1.5"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, rotateY: 180, scale: 0.95 }}
+              whileInView={{ opacity: 1, rotateY: 0, scale: 1 }}
               viewport={{ once: false, margin: '-60px' }}
-              transition={{ duration: 0.75, delay: (idx % 3) * 0.1, ease: 'easeOut' }}
+              transition={{ duration: 0.85, delay: (idx % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
               onClick={() => setSelectedIdx(idx)}
             >
               {/* Image */}

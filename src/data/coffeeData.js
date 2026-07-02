@@ -269,23 +269,15 @@ export const galleryItems = [
 
 export const faqs = [
   {
-    question: 'What makes Dheek-cafe a luxury brand?',
-    answer: 'We source only top 1% specialty grade beans that rate above 85 on the SCCA scale. Our micro-roasting process, cryogenic grinding, and scientific gold-ratio brewing guarantee an exceptional sensory experience that separates us from mass-market coffee companies.',
+    question: "Do you sell coffee beans wholesale or direct to consumers? (Sell or Not)",
+    answer: "We offer both! You can purchase our fresh micro-lots directly from our online cellar, or contact our team if you are a specialty café looking for custom roasting and wholesale partnerships."
   },
   {
-    question: 'Where do you source your beans?',
-    answer: 'We form direct-trade relationships with coffee estates in Panama, Ethiopia, Sumatra, and Kenya. Each location is chosen for its unique soil properties, high-altitude micro-climates, and ethical worker practices.',
+    question: "How does the Dheek Cellar Membership work? (Membership)",
+    answer: "Our members receive monthly deliveries of freshly roasted single-origin coffees, exclusive early access to rare micro-lots, invites to private laboratory cupping events, and complimentary carbon-neutral shipping."
   },
   {
-    question: 'How should I store my premium coffee beans?',
-    answer: 'Keep the beans in our nitrogen-flushed, aroma-sealed packages, or store them in a cool, dark place inside an airtight container. Never freeze or refrigerate coffee beans, as moisture will degrade the precious volatile oils.',
-  },
-  {
-    question: 'Do you offer international shipping?',
-    answer: 'Yes, we ship globally using carbon-neutral priority shipping. Our bags are vacuum-sealed immediately after roasting to ensure they arrive at your doorstep in peak condition.',
-  },
-  {
-    question: 'Can I subscribe to recurring deliveries?',
-    answer: 'Absolutely. We offer a "Cellar Member Club" subscription, delivering custom-selected single origins or signature blends monthly, alongside exclusive micro-lot tasting packages.',
-  },
+    question: "How can I share my feedback or contact your roasters? (Let us Know)",
+    answer: "We would love to hear from you! You can use our contact form below to drop us a line, or email us directly at dheekshithnaidu@gmail.com with any suggestions, reviews, or questions."
+  }
 ];
