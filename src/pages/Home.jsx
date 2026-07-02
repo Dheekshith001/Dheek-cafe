@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import ScrollBackground from '../components/ScrollBackground';
+import ScrollCard from '../components/ScrollCard';
 import FeaturedCollection from '../components/FeaturedCollection';
 import BestSellers from '../components/BestSellers';
 import About from '../components/About';
@@ -20,6 +21,9 @@ export default function Home() {
     <div className="bg-chocolate min-h-screen text-cream relative">
       {/* Scroll-linked background transition */}
       <ScrollBackground />
+
+      {/* Floating 3D Morphing Card */}
+      <ScrollCard />
 
       {/* 1. Premium Navbar */}
       <Navbar />

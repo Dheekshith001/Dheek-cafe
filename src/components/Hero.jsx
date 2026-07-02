@@ -178,7 +178,7 @@ export default function Hero() {
           </div>
 
           {/* Main Hero Coffee Cup Image */}
-          <div ref={cupRef} className="relative z-10 w-[280px] h-[280px] md:w-[380px] md:h-[380px] select-none">
+          <div ref={cupRef} className="lg:hidden relative z-10 w-[280px] h-[280px] md:w-[380px] md:h-[380px] select-none">
             {/* Soft Steam Overlay */}
             <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex gap-1 pointer-events-none">
               <div className="w-1 h-12 bg-white/20 rounded-full filter blur-[2px] steam-effect" style={{ animationDelay: '0s' }} />
