@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useScrollCardContext } from '../context/ScrollCardContext';
 
 export default function About() {
+  const aboutTargetRef = useRef(null);
+  const { registerTarget } = useScrollCardContext();
+
+  useEffect(() => {
+    if (aboutTargetRef.current) {
+      registerTarget('about', aboutTargetRef.current);
+    }
+  }, [registerTarget]);
+
   return (
     <section id="about" className="py-24 bg-transparent relative overflow-hidden">
       {/* Decorative Blur Backgrounds */}
@@ -25,23 +35,23 @@ export default function About() {
               <img
                 src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80"
                 alt="Luxury Roastery Equipment"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500"
                 loading="lazy"
               />
             </motion.div>
 
-            {/* Front main image */}
             <motion.div
+              ref={aboutTargetRef}
               className="absolute right-4 bottom-4 w-2/3 aspect-[4/5] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-gold/25"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 1 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0 }}
             >
               <img
                 src="https://images.unsplash.com/photo-1606791405792-1004f1718d0c?auto=format&fit=crop&w=600&q=80"
                 alt="Expert Barista Pouring Coffee"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500"
                 loading="lazy"
               />
             </motion.div>
@@ -74,23 +84,6 @@ export default function About() {
             <p className="text-cream-dark/70 text-sm font-light leading-relaxed mb-8">
               Every bean passing through our doors undergoes rigorous cryogenic sorting and precise heat roasting profiles inside our boutique laboratory. This ensures that when the hot water meets the grounds, a symphony of jasmine, cedarwood, and natural fruit sugars are released.
             </p>
-
-            <div className="flex items-center gap-6">
-              <div className="flex flex-col">
-                <span className="font-serif text-2xl font-bold text-cream">1,500m+</span>
-                <span className="text-[10px] uppercase tracking-widest text-cream-dark/50 mt-1">Growth Altitude</span>
-              </div>
-              <div className="w-[1px] h-10 bg-white/10" />
-              <div className="flex flex-col">
-                <span className="font-serif text-2xl font-bold text-cream">100%</span>
-                <span className="text-[10px] uppercase tracking-widest text-cream-dark/50 mt-1">Direct Trade</span>
-              </div>
-              <div className="w-[1px] h-10 bg-white/10" />
-              <div className="flex flex-col">
-                <span className="font-serif text-2xl font-bold text-cream">88.5+</span>
-                <span className="text-[10px] uppercase tracking-widest text-cream-dark/50 mt-1">Average Cup Score</span>
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>

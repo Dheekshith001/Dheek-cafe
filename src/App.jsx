@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 import Home from './pages/Home';
+import { ScrollCardProvider } from './context/ScrollCardContext';
 import './App.css';
 
 function App() {
@@ -32,7 +33,11 @@ function App() {
     };
   }, []);
 
-  return <Home />;
+  return (
+    <ScrollCardProvider>
+      <Home />
+    </ScrollCardProvider>
+  );
 }
 
 export default App;

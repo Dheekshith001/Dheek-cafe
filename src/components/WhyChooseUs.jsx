@@ -2,6 +2,37 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
 import { features } from '../data/coffeeData';
+import use3DTilt from '../hooks/use3DTilt';
+
+function FeatureCard({ feature, idx }) {
+  const cardRef = use3DTilt(10, 1.015);
+  // Dynamically resolve Lucide Icon
+  const IconComponent = Icons[feature.icon] || Icons.Coffee;
+
+  return (
+    <motion.div
+      ref={cardRef}
+      className="bg-chocolate border border-white/10 rounded-2xl p-8 flex flex-col items-center text-center hover:border-gold/40 hover:shadow-[0_0_30px_rgba(205,164,94,0.12),_0_20px_40px_rgba(0,0,0,0.4)] group"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.6, delay: idx * 0.1 }}
+    >
+      {/* Icon Container */}
+      <div className="w-14 h-14 bg-espresso/40 border border-gold/20 rounded-xl flex items-center justify-center text-gold mb-6 group-hover:bg-gold group-hover:text-chocolate group-hover:border-gold group-hover:shadow-[0_0_15px_rgba(205,164,94,0.45)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+        <IconComponent className="w-6 h-6 transition-transform duration-500 ease-out group-hover:rotate-12 group-hover:scale-110" />
+      </div>
+
+      {/* Content */}
+      <h3 className="text-lg font-serif font-bold text-cream mb-3 group-hover:text-gold transition-colors duration-300">
+        {feature.title}
+      </h3>
+      <p className="text-sm text-cream-dark/70 font-light leading-relaxed">
+        {feature.description}
+      </p>
+    </motion.div>
+  );
+}
 
 export default function WhyChooseUs() {
   return (
@@ -22,34 +53,9 @@ export default function WhyChooseUs() {
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, idx) => {
-            // Dynamically resolve Lucide Icon
-            const IconComponent = Icons[feature.icon] || Icons.Coffee;
-
-            return (
-              <motion.div
-                key={feature.title}
-                className="bg-chocolate border border-white/10 rounded-2xl p-8 flex flex-col items-center text-center hover:border-gold/40 hover:shadow-[0_0_30px_rgba(205,164,94,0.12),_0_20px_40px_rgba(0,0,0,0.4)] hover:-translate-y-2 hover:scale-[1.01] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-              >
-                {/* Icon Container */}
-                <div className="w-14 h-14 bg-espresso/40 border border-gold/20 rounded-xl flex items-center justify-center text-gold mb-6 group-hover:bg-gold group-hover:text-chocolate group-hover:border-gold group-hover:shadow-[0_0_15px_rgba(205,164,94,0.45)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                  <IconComponent className="w-6 h-6 transition-transform duration-500 ease-out group-hover:rotate-12 group-hover:scale-110" />
-                </div>
-
-                {/* Content */}
-                <h3 className="text-lg font-serif font-bold text-cream mb-3 group-hover:text-gold transition-colors duration-300">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-cream-dark/70 font-light leading-relaxed">
-                  {feature.description}
-                </p>
-              </motion.div>
-            );
-          })}
+          {features.map((feature, idx) => (
+            <FeatureCard key={feature.title} feature={feature} idx={idx} />
+          ))}
         </div>
       </div>
     </section>

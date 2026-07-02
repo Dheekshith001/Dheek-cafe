@@ -1,6 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { menuCategories, menuItems } from '../data/coffeeData';
+import use3DTilt from '../hooks/use3DTilt';
+import { useScrollCardContext } from '../context/ScrollCardContext';
+
+function MenuItemCard({ item }) {
+  // Use slightly lower max tilt degrees (8) for a wider horizontal card layout
+  const cardRef = use3DTilt(8, 1.012);
+  const menuTargetRef = useRef(null);
+  const { registerTarget } = useScrollCardContext();
+
+  useEffect(() => {
+    if (item.id === 2 && menuTargetRef.current) {
+      registerTarget('menu', menuTargetRef.current);
+    }
+  }, [registerTarget, item.id]);
+
+  return (
+    <motion.div
+      ref={item.id === 2 ? null : cardRef}
+      layout
+      initial={item.id === 2 ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
+      animate={item.id === 2 ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+      exit={item.id === 2 ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
+      transition={item.id === 2 ? { duration: 0 } : { duration: 0.4 }}
+      className="flex items-center gap-4 md:gap-6 bg-espresso-dark/20 border border-white/8 rounded-2xl p-4 md:p-6 hover:border-gold/35 hover:bg-espresso-dark/45 hover:shadow-[0_12px_30px_rgba(205,164,94,0.08),_0_10px_25px_rgba(0,0,0,0.3)] group"
+    >
+      {/* Thumbnail */}
+      <div className="w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden flex-shrink-0 border border-white/5 bg-chocolate/30 relative">
+        <img
+          src={item.image}
+          alt={item.name}
+          className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          loading="lazy"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="flex-grow text-left">
+        <div className="flex justify-between items-baseline gap-2 mb-1.5">
+          <h3 className="text-base md:text-lg font-serif font-bold text-cream">
+            {item.name}
+          </h3>
+          <span className="text-base font-serif font-bold text-gold group-hover:text-gold-hover transition-colors duration-300 flex-shrink-0">
+            {item.price}
+          </span>
+        </div>
+        <div className="w-full border-t border-dashed border-white/10 group-hover:border-gold/20 my-2 transition-colors duration-500" />
+        <p className="text-xs md:text-sm text-cream-dark/60 font-light leading-relaxed">
+          {item.notes}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function CoffeeMenu() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -52,41 +105,7 @@ export default function CoffeeMenu() {
         >
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => (
-              <motion.div
-                layout
-                key={item.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
-                className="flex items-center gap-4 md:gap-6 bg-espresso-dark/20 border border-white/8 rounded-2xl p-4 md:p-6 hover:border-gold/35 hover:bg-espresso-dark/45 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(205,164,94,0.08),_0_10px_25px_rgba(0,0,0,0.3)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group"
-              >
-                {/* Thumbnail */}
-                <div className="w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden flex-shrink-0 border border-white/5">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="flex-grow text-left">
-                  <div className="flex justify-between items-baseline gap-2 mb-1.5">
-                    <h3 className="text-base md:text-lg font-serif font-bold text-cream">
-                      {item.name}
-                    </h3>
-                    <span className="text-base font-serif font-bold text-gold group-hover:text-gold-hover transition-colors duration-300 flex-shrink-0">
-                      {item.price}
-                    </span>
-                  </div>
-                  <div className="w-full border-t border-dashed border-white/10 group-hover:border-gold/20 my-2 transition-colors duration-500" />
-                  <p className="text-xs md:text-sm text-cream-dark/60 font-light leading-relaxed">
-                    {item.notes}
-                  </p>
-                </div>
-              </motion.div>
+              <MenuItemCard key={item.id} item={item} />
             ))}
           </AnimatePresence>
         </motion.div>

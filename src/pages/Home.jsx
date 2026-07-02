@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import ScrollBackground from '../components/ScrollBackground';
 import ScrollCard from '../components/ScrollCard';
+import FloatingBeans from '../components/FloatingBeans';
 import FeaturedCollection from '../components/FeaturedCollection';
 import BestSellers from '../components/BestSellers';
 import About from '../components/About';
@@ -18,12 +19,15 @@ import Footer from '../components/Footer';
 
 export default function Home() {
   return (
-    <div className="bg-chocolate min-h-screen text-cream relative">
+    <div className="bg-transparent min-h-screen text-cream relative" id="home">
       {/* Scroll-linked background transition */}
       <ScrollBackground />
 
       {/* Floating 3D Morphing Card */}
       <ScrollCard />
+
+      {/* Floating Background Coffee Beans */}
+      <FloatingBeans />
 
       {/* 1. Premium Navbar */}
       <Navbar />

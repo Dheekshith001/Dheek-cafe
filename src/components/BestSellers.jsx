@@ -1,7 +1,92 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Star, Eye, ShoppingCart } from 'lucide-react';
 import { bestSellers } from '../data/coffeeData';
+import use3DTilt from '../hooks/use3DTilt';
+import { useScrollCardContext } from '../context/ScrollCardContext';
+
+function BestSellerCard({ item, idx }) {
+  const cardRef = use3DTilt(10, 1.015);
+  const sellersTargetRef = useRef(null);
+  const { registerTarget } = useScrollCardContext();
+
+  useEffect(() => {
+    if (idx === 0 && sellersTargetRef.current) {
+      registerTarget('sellers', sellersTargetRef.current);
+    }
+  }, [registerTarget, idx]);
+
+  return (
+    <motion.div
+      ref={cardRef}
+      className="bg-chocolate border border-white/10 rounded-2xl overflow-hidden hover:border-gold/45 hover:shadow-[0_0_35px_rgba(205,164,94,0.18),_0_25px_60px_rgba(0,0,0,0.6)] group"
+      initial={idx === 0 ? { opacity: 1 } : { opacity: 0, scale: 0.95 }}
+      whileInView={idx === 0 ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={idx === 0 ? { duration: 0 } : { duration: 0.6, delay: idx * 0.1 }}
+      style={{ transformStyle: 'preserve-3d' }}
+    >
+      {/* Image & Quick View Hover - Floating Depth Target */}
+      <div 
+        ref={idx === 0 ? sellersTargetRef : null}
+        className="relative aspect-[4/3] overflow-hidden"
+        style={{ transform: 'translateZ(30px)', transformStyle: 'preserve-3d' }}
+      >
+        <img
+          id={idx === 0 ? "sellers-native-img" : undefined}
+          src={item.image}
+          alt={item.name}
+          className={`w-full h-full object-cover group-hover:scale-115 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            idx === 0 ? 'lg:opacity-0' : 'opacity-100'
+          }`}
+          loading="lazy"
+        />
+        {/* Overlay details */}
+        <div className="absolute inset-0 bg-chocolate/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+          <button className="w-12 h-12 bg-gold hover:bg-gold-hover text-chocolate rounded-full flex items-center justify-center shadow-lg hover:shadow-[0_0_15px_rgba(205,164,94,0.5)] transition-all duration-300 hover:scale-110 cursor-pointer" aria-label="Quick View">
+            <Eye className="w-5 h-5" />
+          </button>
+          <button className="w-12 h-12 bg-cream text-chocolate hover:bg-gold rounded-full flex items-center justify-center shadow-lg hover:shadow-[0_0_15px_rgba(251,249,244,0.4)] transition-all duration-300 hover:scale-110 cursor-pointer" aria-label="Add to Cart">
+            <ShoppingCart className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+
+      {/* Card Details - Floating Depth */}
+      <div className="p-6" style={{ transformStyle: 'preserve-3d' }}>
+        <div 
+          className="flex items-center justify-between mb-4"
+          style={{ transform: 'translateZ(20px)' }}
+        >
+          {/* Rating & Reviews Count */}
+          <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-0.5">
+              <Star className="w-3.5 h-3.5 fill-gold text-gold" />
+              <span className="text-xs font-semibold text-gold">{item.rating}</span>
+            </div>
+            <span className="text-xs text-cream-dark/50">({item.reviews} reviews)</span>
+          </div>
+
+          {/* Pricing tag */}
+          <span className="text-xl font-serif font-bold text-gold">{item.price}</span>
+        </div>
+
+        <h3 
+          className="text-lg font-serif font-bold text-cream mb-2 group-hover:text-gold transition-colors duration-300"
+          style={{ transform: 'translateZ(35px)' }}
+        >
+          {item.name}
+        </h3>
+        <p 
+          className="text-sm text-cream-dark/70 font-light leading-relaxed"
+          style={{ transform: 'translateZ(25px)' }}
+        >
+          {item.description}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function BestSellers() {
   return (
@@ -26,57 +111,7 @@ export default function BestSellers() {
         {/* Best Sellers Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {bestSellers.map((item, idx) => (
-            <motion.div
-              key={item.id}
-              className="bg-chocolate border border-white/10 rounded-2xl overflow-hidden hover:border-gold/45 hover:shadow-[0_0_35px_rgba(205,164,94,0.18),_0_25px_60px_rgba(0,0,0,0.6)] hover:-translate-y-2 hover:scale-[1.015] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-            >
-              {/* Image & Quick View Hover */}
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-full object-cover group-hover:scale-115 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                  loading="lazy"
-                />
-                {/* Overlay details */}
-                <div className="absolute inset-0 bg-chocolate/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-                  <button className="w-12 h-12 bg-gold hover:bg-gold-hover text-chocolate rounded-full flex items-center justify-center shadow-lg hover:shadow-[0_0_15px_rgba(205,164,94,0.5)] transition-all duration-300 hover:scale-110 cursor-pointer" aria-label="Quick View">
-                    <Eye className="w-5 h-5" />
-                  </button>
-                  <button className="w-12 h-12 bg-cream text-chocolate hover:bg-gold rounded-full flex items-center justify-center shadow-lg hover:shadow-[0_0_15px_rgba(251,249,244,0.4)] transition-all duration-300 hover:scale-110 cursor-pointer" aria-label="Add to Cart">
-                    <ShoppingCart className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Card Details */}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  {/* Rating & Reviews Count */}
-                  <div className="flex items-center gap-1.5">
-                    <div className="flex items-center gap-0.5">
-                      <Star className="w-3.5 h-3.5 fill-gold text-gold" />
-                      <span className="text-xs font-semibold text-gold">{item.rating}</span>
-                    </div>
-                    <span className="text-xs text-cream-dark/50">({item.reviews} reviews)</span>
-                  </div>
-
-                  {/* Pricing tag */}
-                  <span className="text-xl font-serif font-bold text-gold">{item.price}</span>
-                </div>
-
-                <h3 className="text-lg font-serif font-bold text-cream mb-2 group-hover:text-gold transition-colors duration-300">
-                  {item.name}
-                </h3>
-                <p className="text-sm text-cream-dark/70 font-light leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            </motion.div>
+            <BestSellerCard key={item.id} item={item} idx={idx} />
           ))}
         </div>
       </div>

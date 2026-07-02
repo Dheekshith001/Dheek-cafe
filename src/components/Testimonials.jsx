@@ -4,10 +4,52 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { Star } from 'lucide-react';
 import { testimonials } from '../data/coffeeData';
+import use3DTilt from '../hooks/use3DTilt';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+
+function TestimonialCard({ t }) {
+  const cardRef = use3DTilt(10, 1.015);
+
+  return (
+    <div
+      ref={cardRef}
+      className="bg-espresso-dark/30 border border-white/5 backdrop-blur-md rounded-2xl p-8 flex flex-col justify-between h-full min-h-[250px] shadow-lg select-none hover:border-gold/30 hover:shadow-[0_0_30px_rgba(205,164,94,0.08),_0_20px_40px_rgba(0,0,0,0.3)] group"
+    >
+      <div>
+        {/* Rating */}
+        <div className="flex gap-1 mb-6">
+          {[...Array(t.rating)].map((_, i) => (
+            <Star key={i} className="w-4 h-4 fill-gold text-gold" />
+          ))}
+        </div>
+
+        {/* Comment */}
+        <p className="text-cream-dark/85 font-light italic leading-relaxed mb-8 flex-grow text-left">
+          "{t.comment}"
+        </p>
+      </div>
+
+      {/* User Profile */}
+      <div className="flex items-center gap-4 border-t border-white/5 pt-4 text-left mt-auto">
+        <img
+          src={t.avatar}
+          alt={t.name}
+          className="w-12 h-12 rounded-full object-cover border border-gold/30 opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+          loading="lazy"
+        />
+        <div>
+          <h4 className="font-serif font-bold text-cream text-base leading-none mb-1 group-hover:text-gold transition-colors duration-300">
+            {t.name}
+          </h4>
+          <span className="text-xs text-gold-hover">{t.role}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Testimonials() {
   return (
@@ -47,36 +89,8 @@ export default function Testimonials() {
             className="pb-16"
           >
             {testimonials.map((t) => (
-              <SwiperSlide key={t.id}>
-                <div className="bg-espresso-dark/30 border border-white/5 backdrop-blur-md rounded-2xl p-8 flex flex-col justify-between h-full min-h-[250px] shadow-lg select-none hover:border-gold/30 hover:shadow-[0_0_30px_rgba(205,164,94,0.08),_0_20px_40px_rgba(0,0,0,0.3)] hover:-translate-y-1 hover:scale-[1.01] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group">
-                  {/* Rating */}
-                  <div className="flex gap-1 mb-6">
-                    {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-gold text-gold" />
-                    ))}
-                  </div>
-
-                  {/* Comment */}
-                  <p className="text-cream-dark/85 font-light italic leading-relaxed mb-8 flex-grow text-left">
-                    "{t.comment}"
-                  </p>
-
-                  {/* User Profile */}
-                  <div className="flex items-center gap-4 border-t border-white/5 pt-4 text-left">
-                    <img
-                      src={t.avatar}
-                      alt={t.name}
-                      className="w-12 h-12 rounded-full object-cover border border-gold/30"
-                      loading="lazy"
-                    />
-                    <div>
-                      <h4 className="font-serif font-bold text-cream text-base leading-none mb-1">
-                        {t.name}
-                      </h4>
-                      <span className="text-xs text-gold-hover">{t.role}</span>
-                    </div>
-                  </div>
-                </div>
+              <SwiperSlide key={t.id} className="h-auto">
+                <TestimonialCard t={t} />
               </SwiperSlide>
             ))}
           </Swiper>

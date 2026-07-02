@@ -2,13 +2,23 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Star } from 'lucide-react';
 import gsap from 'gsap';
+import { useScrollCardContext } from '../context/ScrollCardContext';
 
 export default function Hero() {
   const containerRef = useRef(null);
   const cupRef = useRef(null);
+  const heroTargetRef = useRef(null);
   const bean1Ref = useRef(null);
   const bean2Ref = useRef(null);
   const bean3Ref = useRef(null);
+
+  const { registerTarget } = useScrollCardContext();
+
+  useEffect(() => {
+    if (heroTargetRef.current) {
+      registerTarget('hero', heroTargetRef.current);
+    }
+  }, [registerTarget]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -19,14 +29,15 @@ export default function Hero() {
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
 
-      // Parallax displacements
-      gsap.to(cupRef.current, {
-        x: x * 0.05,
-        y: y * 0.05,
-        rotation: x * 0.02,
-        duration: 0.8,
-        ease: 'power2.out',
-      });
+      if (cupRef.current) {
+        gsap.to(cupRef.current, {
+          x: x * 0.05,
+          y: y * 0.05,
+          rotation: x * 0.02,
+          duration: 0.8,
+          ease: 'power2.out',
+        });
+      }
 
       gsap.to(bean1Ref.current, {
         x: x * -0.1,
@@ -176,6 +187,12 @@ export default function Hero() {
               <path d="M 16 41 C 38 48, 62 52, 84 59" fill="none" stroke="#110906" strokeWidth="3" strokeLinecap="round" />
             </svg>
           </div>
+
+          {/* Placeholder div for the 3D flying ScrollCard (only visible on desktop layout as a target coordinate box) */}
+          <div 
+            ref={heroTargetRef} 
+            className="hidden lg:block relative z-10 w-[380px] h-[380px] select-none"
+          />
 
           {/* Main Hero Coffee Cup Image */}
           <div ref={cupRef} className="lg:hidden relative z-10 w-[280px] h-[280px] md:w-[380px] md:h-[380px] select-none">

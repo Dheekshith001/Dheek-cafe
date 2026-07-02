@@ -60,7 +60,7 @@ export default function ScrollBackground() {
   const bgs = [bgBeans, bgEspresso, bgLatte];
 
   return (
-    <div className="fixed inset-0 w-full h-full z-0 overflow-hidden pointer-events-none select-none">
+    <div className="fixed inset-0 w-full h-full z-[-1] bg-chocolate overflow-hidden pointer-events-none select-none">
       {/* Global Background Video */}
       <video
         autoPlay

@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
+import use3DTilt from '../hooks/use3DTilt';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const detailsCardRef = use3DTilt(8, 1.012);
+  const formCardRef = use3DTilt(8, 1.012);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,7 +61,7 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
           {/* Left Block: Business Details */}
-          <div className="lg:col-span-5 flex flex-col justify-between bg-espresso-dark/20 border border-white/5 rounded-3xl p-8 md:p-10 text-left hover:border-gold/30 hover:shadow-[0_0_30px_rgba(205,164,94,0.08),_0_20px_50px_rgba(0,0,0,0.5)] hover:-translate-y-1 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group">
+          <div ref={detailsCardRef} className="lg:col-span-5 flex flex-col justify-between bg-espresso-dark/20 border border-white/5 rounded-3xl p-8 md:p-10 text-left hover:border-gold/30 hover:shadow-[0_0_30px_rgba(205,164,94,0.08),_0_20px_50px_rgba(0,0,0,0.5)] group">
             <div>
               <h3 className="font-serif text-2xl font-bold text-cream mb-2">
                 Dheek Laboratory
@@ -145,7 +149,7 @@ export default function Contact() {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-espresso-dark/20 border border-white/8 rounded-3xl p-8 text-left hover:border-gold/30 hover:shadow-[0_0_30px_rgba(205,164,94,0.08),_0_20px_50px_rgba(0,0,0,0.5)] hover:-translate-y-1 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group/form">
+            <div ref={formCardRef} className="bg-espresso-dark/20 border border-white/8 rounded-3xl p-8 text-left hover:border-gold/30 hover:shadow-[0_0_30px_rgba(205,164,94,0.08),_0_20px_50px_rgba(0,0,0,0.5)] group/form">
               <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                 {!sent ? (
                   <>
