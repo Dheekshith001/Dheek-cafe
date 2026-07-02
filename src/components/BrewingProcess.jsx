@@ -23,14 +23,14 @@ export default function BrewingProcess() {
         </div>
 
         {/* Timeline Layout */}
-        <div className="relative border-l border-gold/15 max-w-3xl mx-auto pl-6 md:pl-12 flex flex-col gap-16 text-left">
+        <div className="relative border-l border-gold/30 max-w-3xl mx-auto pl-6 md:pl-12 flex flex-col gap-16 text-left">
           {brewingSteps.map((step, idx) => (
             <motion.div
               key={step.step}
               className="relative"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
+              viewport={{ once: false, margin: '-100px' }}
               transition={{ duration: 0.8, delay: idx * 0.15 }}
             >
               {/* Timeline Bullet Indicator */}
@@ -41,7 +41,7 @@ export default function BrewingProcess() {
               {/* Step Info */}
               <div className="flex flex-col md:flex-row gap-4 items-start md:items-baseline">
                 {/* Step Number */}
-                <span className="font-serif text-5xl font-extrabold text-gold/25 leading-none md:w-20">
+                <span className="font-serif text-5xl font-extrabold text-gold/65 leading-none md:w-20">
                   {step.step}
                 </span>
 
@@ -50,11 +50,11 @@ export default function BrewingProcess() {
                   <h3 className="text-2xl font-serif font-bold text-cream mb-1">
                     {step.title}
                   </h3>
-                  <p className="text-xs uppercase tracking-widest text-gold mb-4">
+                  <p className="text-xs uppercase tracking-widest text-gold-hover mb-4">
                     {step.subtitle}
                   </p>
                   {/* Description */}
-                  <p className="text-sm md:text-base text-cream-dark/75 font-light leading-relaxed">
+                  <p className="text-sm md:text-base text-cream/90 font-light leading-relaxed">
                     {step.description}
                   </p>
                 </div>

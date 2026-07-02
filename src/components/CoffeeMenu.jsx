@@ -7,24 +7,16 @@ import { useScrollCardContext } from '../context/ScrollCardContext';
 function MenuItemCard({ item }) {
   // Use slightly lower max tilt degrees (8) for a wider horizontal card layout
   const cardRef = use3DTilt(8, 1.012);
-  const menuTargetRef = useRef(null);
-  const { registerTarget } = useScrollCardContext();
-
-  useEffect(() => {
-    if (item.id === 2 && menuTargetRef.current) {
-      registerTarget('menu', menuTargetRef.current);
-    }
-  }, [registerTarget, item.id]);
 
   return (
     <motion.div
-      ref={item.id === 2 ? null : cardRef}
+      ref={cardRef}
       layout
-      initial={item.id === 2 ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
-      animate={item.id === 2 ? { opacity: 1 } : { opacity: 1, scale: 1 }}
-      exit={item.id === 2 ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
-      transition={item.id === 2 ? { duration: 0 } : { duration: 0.4 }}
-      className="flex items-center gap-4 md:gap-6 bg-espresso-dark/20 border border-white/8 rounded-2xl p-4 md:p-6 hover:border-gold/35 hover:bg-espresso-dark/45 hover:shadow-[0_12px_30px_rgba(205,164,94,0.08),_0_10px_25px_rgba(0,0,0,0.3)] group"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.4 }}
+      className="flex items-center gap-4 md:gap-6 bg-espresso-dark/20 border border-white/10 rounded-2xl p-4 md:p-6 hover:border-gold/50 hover:bg-espresso-dark/45 hover:shadow-[0_12px_35px_rgba(205,164,94,0.15),_0_10px_25px_rgba(0,0,0,0.45)] group transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
     >
       {/* Thumbnail */}
       <div className="w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden flex-shrink-0 border border-white/5 bg-chocolate/30 relative">
@@ -46,8 +38,8 @@ function MenuItemCard({ item }) {
             {item.price}
           </span>
         </div>
-        <div className="w-full border-t border-dashed border-white/10 group-hover:border-gold/20 my-2 transition-colors duration-500" />
-        <p className="text-xs md:text-sm text-cream-dark/60 font-light leading-relaxed">
+        <div className="w-full border-t border-dashed border-white/10 group-hover:border-gold/40 my-2 transition-colors duration-500" />
+        <p className="text-xs md:text-sm text-cream-dark/75 font-light leading-relaxed">
           {item.notes}
         </p>
       </div>

@@ -19,10 +19,10 @@ function BestSellerCard({ item, idx }) {
   return (
     <motion.div
       ref={cardRef}
-      className="bg-chocolate border border-white/10 rounded-2xl overflow-hidden hover:border-gold/45 hover:shadow-[0_0_35px_rgba(205,164,94,0.18),_0_25px_60px_rgba(0,0,0,0.6)] group"
+      className="bg-chocolate border border-white/10 rounded-2xl overflow-hidden hover:border-gold/60 hover:shadow-[0_0_40px_rgba(205,164,94,0.25),_0_25px_60px_rgba(0,0,0,0.65)] group transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
       initial={idx === 0 ? { opacity: 1 } : { opacity: 0, scale: 0.95 }}
       whileInView={idx === 0 ? { opacity: 1 } : { opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: '-50px' }}
+      viewport={{ once: false, margin: '-50px' }}
       transition={idx === 0 ? { duration: 0 } : { duration: 0.6, delay: idx * 0.1 }}
       style={{ transformStyle: 'preserve-3d' }}
     >
@@ -51,7 +51,7 @@ function BestSellerCard({ item, idx }) {
           </button>
         </div>
       </div>
-
+ 
       {/* Card Details - Floating Depth */}
       <div className="p-6" style={{ transformStyle: 'preserve-3d' }}>
         <div 
@@ -64,13 +64,13 @@ function BestSellerCard({ item, idx }) {
               <Star className="w-3.5 h-3.5 fill-gold text-gold" />
               <span className="text-xs font-semibold text-gold">{item.rating}</span>
             </div>
-            <span className="text-xs text-cream-dark/50">({item.reviews} reviews)</span>
+            <span className="text-xs text-cream-dark/70">({item.reviews} reviews)</span>
           </div>
-
+ 
           {/* Pricing tag */}
           <span className="text-xl font-serif font-bold text-gold">{item.price}</span>
         </div>
-
+ 
         <h3 
           className="text-lg font-serif font-bold text-cream mb-2 group-hover:text-gold transition-colors duration-300"
           style={{ transform: 'translateZ(35px)' }}
@@ -78,7 +78,7 @@ function BestSellerCard({ item, idx }) {
           {item.name}
         </h3>
         <p 
-          className="text-sm text-cream-dark/70 font-light leading-relaxed"
+          className="text-sm text-cream-dark/80 font-light leading-relaxed"
           style={{ transform: 'translateZ(25px)' }}
         >
           {item.description}

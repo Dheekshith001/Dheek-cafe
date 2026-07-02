@@ -61,7 +61,14 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
           {/* Left Block: Business Details */}
-          <div ref={detailsCardRef} className="lg:col-span-5 flex flex-col justify-between bg-espresso-dark/20 border border-white/5 rounded-3xl p-8 md:p-10 text-left hover:border-gold/30 hover:shadow-[0_0_30px_rgba(205,164,94,0.08),_0_20px_50px_rgba(0,0,0,0.5)] group">
+          <motion.div
+            ref={detailsCardRef}
+            className="lg:col-span-5 flex flex-col justify-between bg-espresso-dark/20 border border-white/5 rounded-3xl p-8 md:p-10 text-left hover:border-gold/50 hover:shadow-[0_0_35px_rgba(205,164,94,0.18),_0_20px_50px_rgba(0,0,0,0.55)] group transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: false, margin: '-60px' }}
+            transition={{ duration: 0.8 }}
+          >
             <div>
               <h3 className="font-serif text-2xl font-bold text-cream mb-2">
                 Dheek Laboratory
@@ -130,12 +137,18 @@ export default function Contact() {
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Block: Map and Contact Form */}
           <div className="lg:col-span-7 flex flex-col gap-6 justify-between">
             {/* Live Google Map Embed */}
-            <div className="relative h-60 rounded-3xl overflow-hidden border border-white/5 shadow-inner bg-espresso-dark/30 hover:border-gold/20 transition-all duration-300">
+            <motion.div
+              className="relative h-60 rounded-3xl overflow-hidden border border-white/5 shadow-inner bg-espresso-dark/30 hover:border-gold/45 hover:shadow-[0_0_25px_rgba(205,164,94,0.12)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: false, margin: '-60px' }}
+              transition={{ duration: 0.8 }}
+            >
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d972.221564946357!2d77.61493102072245!3d12.915031200000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15b354cba285%3A0x32c4ab2c0893f76e!2sGUEST%20INN%20LUXURY%20PG%20FOR%20GENTS%202!5e0!3m2!1sen!2sin!4v1782978470969!5m2!1sen!2sin"
                 width="100%"
@@ -146,44 +159,51 @@ export default function Contact() {
                 referrerPolicy="strict-origin-when-cross-origin"
                 title="Dheek-cafe Location Map"
               ></iframe>
-            </div>
+            </motion.div>
 
             {/* Contact Form */}
-            <div ref={formCardRef} className="bg-espresso-dark/20 border border-white/8 rounded-3xl p-8 text-left hover:border-gold/30 hover:shadow-[0_0_30px_rgba(205,164,94,0.08),_0_20px_50px_rgba(0,0,0,0.5)] group/form">
+            <motion.div
+              ref={formCardRef}
+              className="bg-espresso-dark/20 border border-white/10 rounded-3xl p-8 text-left hover:border-gold/50 hover:shadow-[0_0_35px_rgba(205,164,94,0.18),_0_20px_50px_rgba(0,0,0,0.55)] group/form transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: false, margin: '-60px' }}
+              transition={{ duration: 0.8 }}
+            >
               <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                 {!sent ? (
                   <>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div className="flex flex-col gap-2">
-                        <label className="text-xs uppercase tracking-wider text-cream-dark/50">Full Name</label>
+                        <label className="text-xs uppercase tracking-wider text-cream-dark/65">Full Name</label>
                         <input
                           type="text"
                           required
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="bg-espresso/50 border border-white/10 hover:border-white/20 rounded-lg px-4 py-3 text-cream text-sm focus:border-gold focus:shadow-[0_0_15px_rgba(205,164,94,0.15)] focus:outline-none transition-all duration-300"
+                          className="bg-espresso/50 border border-white/10 hover:border-gold/30 rounded-lg px-4 py-3 text-cream text-sm focus:border-gold focus:shadow-[0_0_15px_rgba(205,164,94,0.15)] focus:outline-none transition-all duration-300"
                         />
                       </div>
                       <div className="flex flex-col gap-2">
-                        <label className="text-xs uppercase tracking-wider text-cream-dark/50">Email Address</label>
+                        <label className="text-xs uppercase tracking-wider text-cream-dark/65">Email Address</label>
                         <input
                           type="email"
                           required
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="bg-espresso/50 border border-white/10 hover:border-white/20 rounded-lg px-4 py-3 text-cream text-sm focus:border-gold focus:shadow-[0_0_15px_rgba(205,164,94,0.15)] focus:outline-none transition-all duration-300"
+                          className="bg-espresso/50 border border-white/10 hover:border-gold/30 rounded-lg px-4 py-3 text-cream text-sm focus:border-gold focus:shadow-[0_0_15px_rgba(205,164,94,0.15)] focus:outline-none transition-all duration-300"
                         />
                       </div>
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <label className="text-xs uppercase tracking-wider text-cream-dark/50">Your Message</label>
+                      <label className="text-xs uppercase tracking-wider text-cream-dark/65">Your Message</label>
                       <textarea
                         required
                         rows="4"
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="bg-espresso/50 border border-white/10 hover:border-white/20 rounded-lg px-4 py-3 text-cream text-sm focus:border-gold focus:shadow-[0_0_15px_rgba(205,164,94,0.15)] focus:outline-none transition-all duration-300 resize-none"
+                        className="bg-espresso/50 border border-white/10 hover:border-gold/30 rounded-lg px-4 py-3 text-cream text-sm focus:border-gold focus:shadow-[0_0_15px_rgba(205,164,94,0.15)] focus:outline-none transition-all duration-300 resize-none"
                       />
                     </div>
 
@@ -208,7 +228,7 @@ export default function Contact() {
                   </motion.div>
                 )}
               </form>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

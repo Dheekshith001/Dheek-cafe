@@ -35,11 +35,11 @@ export default function Gallery() {
           {galleryItems.map((item, idx) => (
             <motion.div
               key={item.id}
-              className="relative rounded-2xl overflow-hidden aspect-[4/3] border border-white/5 group cursor-pointer shadow-md"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              className="relative rounded-2xl overflow-hidden aspect-[4/3] border border-white/5 group cursor-pointer shadow-md transition-all duration-500 hover:border-gold/50 hover:shadow-[0_0_35px_rgba(205,164,94,0.2),_0_15px_30px_rgba(0,0,0,0.5)] hover:-translate-y-1.5"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: false, margin: '-60px' }}
+              transition={{ duration: 0.75, delay: (idx % 3) * 0.1, ease: 'easeOut' }}
               onClick={() => setSelectedIdx(idx)}
             >
               {/* Image */}
@@ -88,7 +88,7 @@ export default function Gallery() {
 
             {/* Left Control */}
             <button
-              className="absolute left-6 top-1/2 -translate-y-1/2 p-3 rounded-full border border-white/10 text-cream hover:border-gold hover:text-gold transition-colors duration-300 cursor-pointer"
+              className="absolute left-6 top-1/2 -translate-y-1/2 p-3 rounded-full border border-white/10 text-cream hover:border-gold hover:text-gold transition-all duration-300 hover:scale-110 active:scale-95 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer"
               onClick={handlePrev}
               aria-label="Previous Image"
             >
@@ -121,7 +121,7 @@ export default function Gallery() {
 
             {/* Right Control */}
             <button
-              className="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-full border border-white/10 text-cream hover:border-gold hover:text-gold transition-colors duration-300 cursor-pointer"
+              className="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-full border border-white/10 text-cream hover:border-gold hover:text-gold transition-all duration-300 hover:scale-110 active:scale-95 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer"
               onClick={handleNext}
               aria-label="Next Image"
             >

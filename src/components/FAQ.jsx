@@ -3,6 +3,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { faqs } from '../data/coffeeData';
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.55 } }
+};
+
 export default function FAQ() {
   const [openIdx, setOpenIdx] = useState(null);
 
@@ -26,22 +39,29 @@ export default function FAQ() {
           <div className="w-16 h-[2px] bg-gold mx-auto" />
         </div>
 
-        {/* FAQ Accordion List */}
-        <div className="flex flex-col gap-4 text-left">
+        {/* FAQ Accordion List with staggered entrance */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, margin: '-60px' }}
+          className="flex flex-col gap-4 text-left"
+        >
           {faqs.map((faq, idx) => {
             const isOpen = openIdx === idx;
 
             return (
-              <div
+              <motion.div
                 key={idx}
-                className="bg-espresso-dark/20 border border-white/5 rounded-2xl overflow-hidden hover:border-gold/20 transition-colors duration-300"
+                variants={itemVariants}
+                className="bg-espresso-dark/20 border border-white/5 rounded-2xl overflow-hidden hover:border-gold/50 hover:shadow-[0_0_25px_rgba(205,164,94,0.12)] transition-all duration-300"
               >
                 {/* Header Toggle */}
                 <button
-                  className="w-full flex items-center justify-between gap-4 p-6 md:p-8 cursor-pointer select-none text-left"
+                  className="w-full flex items-center justify-between gap-4 p-6 md:p-8 cursor-pointer select-none text-left group"
                   onClick={() => toggleFAQ(idx)}
                 >
-                  <h3 className="font-serif font-bold text-base md:text-lg text-cream hover:text-gold transition-colors duration-300">
+                  <h3 className={`font-serif font-bold text-base md:text-lg transition-colors duration-300 ${isOpen ? 'text-gold' : 'text-cream group-hover:text-gold'}`}>
                     {faq.question}
                   </h3>
                   <ChevronDown
@@ -59,17 +79,18 @@ export default function FAQ() {
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      style={{ overflow: 'hidden' }}
                     >
-                      <div className="px-6 md:px-8 pb-6 md:pb-8 border-t border-white/5 pt-4 text-sm md:text-base text-cream-dark/75 font-light leading-relaxed">
+                      <div className="px-6 md:px-8 pb-6 md:pb-8 border-t border-gold/10 pt-4 text-sm md:text-base text-cream-dark/75 font-light leading-relaxed">
                         {faq.answer}
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

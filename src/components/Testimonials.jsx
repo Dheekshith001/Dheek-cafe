@@ -16,7 +16,7 @@ function TestimonialCard({ t }) {
   return (
     <div
       ref={cardRef}
-      className="bg-espresso-dark/30 border border-white/5 backdrop-blur-md rounded-2xl p-8 flex flex-col justify-between h-full min-h-[250px] shadow-lg select-none hover:border-gold/30 hover:shadow-[0_0_30px_rgba(205,164,94,0.08),_0_20px_40px_rgba(0,0,0,0.3)] group"
+      className="bg-espresso-dark/30 border border-white/5 backdrop-blur-md rounded-2xl p-8 flex flex-col justify-between h-full min-h-[250px] shadow-lg select-none hover:border-gold/50 hover:shadow-[0_0_35px_rgba(205,164,94,0.15),_0_20px_45px_rgba(0,0,0,0.4)] group transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
     >
       <div>
         {/* Rating */}

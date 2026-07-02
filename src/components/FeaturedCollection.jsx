@@ -19,10 +19,10 @@ function FeaturedCard({ product, idx }) {
   return (
     <motion.div
       ref={cardRef}
-      className="bg-espresso-dark/45 border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-gold/45 hover:shadow-[0_0_30px_rgba(205,164,94,0.15),_0_20px_50px_rgba(0,0,0,0.5)] group"
+      className="bg-espresso-dark/45 border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-gold/60 hover:shadow-[0_0_35px_rgba(205,164,94,0.25),_0_20px_50px_rgba(0,0,0,0.6)] group transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
       initial={idx === 0 ? { opacity: 1 } : { opacity: 0, y: 50 }}
       whileInView={idx === 0 ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: false, margin: '-100px' }}
       transition={idx === 0 ? { duration: 0 } : { duration: 0.8, delay: idx * 0.15 }}
       style={{ transformStyle: 'preserve-3d' }}
     >
@@ -49,7 +49,7 @@ function FeaturedCard({ product, idx }) {
             {product.badge}
           </span>
         </div>
-
+ 
         {/* Rating - Floating Depth */}
         <div 
           className="flex items-center gap-1.5 mb-3"
@@ -57,9 +57,9 @@ function FeaturedCard({ product, idx }) {
         >
           <Star className="w-4 h-4 fill-gold text-gold" />
           <span className="text-xs font-semibold text-gold-hover">{product.rating}</span>
-          <span className="text-xs text-cream-dark/40">• Single Origin</span>
+          <span className="text-xs text-cream-dark/65">• Single Origin</span>
         </div>
-
+ 
         {/* Title & Tagline - Floating Depth */}
         <h3 
           className="text-xl font-serif font-bold text-cream mb-1 group-hover:text-gold transition-colors duration-300"
@@ -73,7 +73,7 @@ function FeaturedCard({ product, idx }) {
         >
           {product.tagline}
         </p>
-
+ 
         {/* Description - Floating Depth */}
         <p 
           className="text-sm text-cream-dark/70 font-light mb-6 leading-relaxed"
@@ -81,7 +81,7 @@ function FeaturedCard({ product, idx }) {
         >
           {product.description}
         </p>
-
+ 
         {/* Notes List - Floating Depth */}
         <div 
           className="flex flex-wrap gap-2 mb-6"
@@ -90,21 +90,21 @@ function FeaturedCard({ product, idx }) {
           {product.notes.map((note) => (
             <span
               key={note}
-              className="text-[10px] bg-espresso/50 border border-gold/15 text-cream-dark px-2.5 py-1 rounded-full uppercase tracking-wider"
+              className="text-[10px] bg-espresso/50 border border-gold/30 text-cream-dark px-2.5 py-1 rounded-full uppercase tracking-wider"
             >
               {note}
             </span>
           ))}
         </div>
       </div>
-
+ 
       {/* Price & Purchase Actions - Floating Depth */}
       <div 
         className="flex items-center justify-between pt-4 border-t border-white/5 mt-auto"
         style={{ transform: 'translateZ(30px)' }}
       >
         <div className="flex flex-col">
-          <span className="text-xs text-cream-dark/50 uppercase tracking-widest">Price</span>
+          <span className="text-xs text-cream-dark/70 uppercase tracking-widest">Price</span>
           <span className="text-2xl font-serif font-bold text-cream">{product.price}</span>
         </div>
 

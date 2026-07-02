@@ -19,7 +19,13 @@ export default function Newsletter() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gold/5 rounded-full filter blur-[150px] pointer-events-none" />
 
       <div className="max-w-4xl mx-auto px-6 relative z-10">
-        <div className="bg-chocolate border border-gold/15 rounded-3xl p-8 md:p-16 text-center shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
+        <motion.div
+          className="bg-chocolate border border-gold/15 rounded-3xl p-8 md:p-16 text-center shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all duration-500 hover:border-gold/30 hover:shadow-[0_0_40px_rgba(205,164,94,0.12),_0_25px_60px_rgba(0,0,0,0.55)]"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: false, margin: '-60px' }}
+          transition={{ duration: 0.8 }}
+        >
           <span className="text-gold uppercase tracking-[0.25em] text-xs font-semibold">
             Join the Club
           </span>
@@ -61,7 +67,7 @@ export default function Newsletter() {
               </motion.div>
             )}
           </form>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

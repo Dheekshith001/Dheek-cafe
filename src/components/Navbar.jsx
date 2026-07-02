@@ -22,7 +22,7 @@ export default function Navbar() {
   return (
     <>
       <motion.header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 w-full z-[995] transition-all duration-500 ${
           isScrolled
             ? 'bg-chocolate/85 backdrop-blur-md border-b border-white/5 py-4 shadow-xl'
             : 'bg-transparent py-6'
@@ -98,7 +98,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-50 bg-chocolate/98 backdrop-blur-lg flex flex-col justify-center p-8 lg:hidden"
+            className="fixed inset-0 z-[995] bg-chocolate/98 backdrop-blur-lg flex flex-col justify-center p-8 lg:hidden"
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
