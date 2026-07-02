@@ -2,6 +2,8 @@
 
 > **Crafted with Passion. Brewed to Perfection.**
 > A premium, award-winning boutique sensory experience website built for **Dheek-cafe**—competing at the standard of Awwwards, CSS Design Awards, and FWA.
+> 
+> 🔗 **Live Demo:** [https://dheek-cafe.vercel.app/](https://dheek-cafe.vercel.app/)
 
 ---
 
@@ -85,7 +87,7 @@ Run the local dev server:
 ```bash
 npm run dev
 ```
-Open your browser and navigate to: **[http://localhost:5173/](http://localhost:5173/)**
+Open your browser and navigate to: **[http://localhost:5173/](http://localhost:5173/)** (or visit the live deployment at **[https://dheek-cafe.vercel.app/](https://dheek-cafe.vercel.app/)**)
 
 ### 3. Build for Production
 To bundle and optimize the project for production deployment:
